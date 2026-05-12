@@ -12,9 +12,11 @@ import { useState } from 'react';
 import { Toast } from './Toast';
 
 export const Header = () => {
-  const { setCampaignData, setLandingData, setFormData, setSalesData } = useStore();
+  const { setCampaignData, setLandingData, setFormData, setSalesData, campaignData } = useStore();
   const { activeVertical, setActiveVertical, activeBenchmarks } = useBenchmarks();
   const [showVerticalToast, setShowVerticalToast] = useState(false);
+
+  const isDataEmpty = !campaignData;
 
   const loadScenario = (type: 'cpm' | 'cpc' | 'cpl' | 'cpa' | 'healthy') => {
     let spend = 10000;
@@ -136,18 +138,24 @@ export const Header = () => {
       <div className="flex gap-4 items-center">
         <div className="flex flex-col items-end">
           <p className="text-[10px] text-gray-400 uppercase tracking-widest font-semibold mb-1">Test Scenarios</p>
-          <select 
-            onChange={(e) => loadScenario(e.target.value as any)}
-            className="appearance-none bg-blue-50/50 border border-blue-100 rounded-md px-3 py-1.5 text-[12px] font-bold text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all cursor-pointer min-w-[140px]"
-            defaultValue=""
-          >
-            <option value="" disabled>Load Scenario...</option>
-            <option value="healthy">Healthy Funnel</option>
-            <option value="cpm">Step 1: High CPM</option>
-            <option value="cpc">Step 2: High CPC</option>
-            <option value="cpl">Step 3: High CPL</option>
-            <option value="cpa">Step 4: High CPA</option>
-          </select>
+          <div className="relative">
+            <select 
+              onChange={(e) => loadScenario(e.target.value as any)}
+              className={`appearance-none border rounded-md px-3 py-1.5 text-[12px] font-bold focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all cursor-pointer min-w-[140px] ${
+                isDataEmpty 
+                  ? 'bg-blue-600 border-blue-700 text-white animate-pulse shadow-lg ring-4 ring-blue-500/20' 
+                  : 'bg-blue-50/50 border-blue-100 text-blue-600'
+              }`}
+              defaultValue=""
+            >
+              <option value="" disabled className="text-gray-900">Load Scenario...</option>
+              <option value="healthy" className="text-gray-900">Healthy Funnel</option>
+              <option value="cpm" className="text-gray-900">Step 1: High CPM</option>
+              <option value="cpc" className="text-gray-900">Step 2: High CPC</option>
+              <option value="cpl" className="text-gray-900">Step 3: High CPL</option>
+              <option value="cpa" className="text-gray-900">Step 4: High CPA</option>
+            </select>
+          </div>
         </div>
         <button 
           onClick={downloadTemplates}

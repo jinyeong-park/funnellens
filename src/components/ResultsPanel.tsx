@@ -91,12 +91,41 @@ export const ResultsPanel = () => {
 
   if (!results) {
     return (
-      <section className="flex-1 flex flex-col bg-white border border-gray-200 border-dashed rounded-lg min-h-[600px] items-center justify-center text-center p-12">
-        <Activity size={48} className="text-gray-200 mb-4" />
-        <h3 className="text-gray-400 text-lg">Diagnostic Results</h3>
-        <p className="text-gray-400 text-sm mt-1 max-w-[280px]">
-          Upload all 4 files and run diagnosis to see automated findings for {activeBenchmarks.name}.
+      <section className="flex-1 flex flex-col bg-white border border-gray-200 border-dashed rounded-xl min-h-[600px] items-center justify-center text-center p-12 shadow-sm">
+        <div className="w-20 h-20 bg-blue-50 rounded-3xl flex items-center justify-center mb-8 rotate-3 shadow-sm border border-blue-100">
+          <Activity size={40} className="text-blue-500 -rotate-3" />
+        </div>
+        <h3 className="text-gray-900 text-[24px] font-bold tracking-tight mb-3">Welcome to FunnelLens Diagnostic</h3>
+        <p className="text-gray-500 text-[15px] leading-relaxed max-w-[380px] mb-10">
+          The expert agent that triangulates your ad spend, landing page, and CRM data to find hidden bottlenecks.
         </p>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-[500px]">
+          <div className="p-6 border border-gray-100 bg-gray-50/50 rounded-xl text-left hover:border-blue-200 transition-all group">
+            <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center mb-4 shadow-sm border border-gray-100 group-hover:scale-110 transition-transform">
+              <Download size={16} className="text-blue-500" />
+            </div>
+            <h4 className="font-bold text-[14px] text-gray-900 mb-1">Upload Your Data</h4>
+            <p className="text-[12px] text-gray-500 leading-normal">
+              Drop 4 CSV files into the left panel to run a full diagnostic scan.
+            </p>
+          </div>
+          
+          <div className="p-6 border border-gray-100 bg-gray-50/50 rounded-xl text-left hover:border-emerald-200 transition-all group border-dashed">
+            <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center mb-4 shadow-sm border border-gray-100 group-hover:scale-110 transition-transform">
+              <Zap size={16} className="text-emerald-500" />
+            </div>
+            <h4 className="font-bold text-[14px] text-gray-900 mb-1">Try a Demo</h4>
+            <p className="text-[12px] text-gray-500 leading-normal">
+              Use the "Test Scenarios" dropdown in the header to instantly load sample data.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-12 flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-100 rounded-full">
+          <Info size={14} className="text-blue-600" />
+          <span className="text-[12px] font-medium text-blue-700">Currently testing for: {activeBenchmarks.name} vertical</span>
+        </div>
       </section>
     );
   }

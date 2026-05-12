@@ -8,11 +8,13 @@ import { UploadPanel } from './components/UploadPanel';
 import { ResultsPanel } from './components/ResultsPanel';
 import { BenchmarkPanel } from './components/BenchmarkPanel';
 import { BenchmarkProvider } from './BenchmarkContext';
+import { OnboardingGuide } from './components/OnboardingGuide';
 
 export default function App() {
   return (
     <BenchmarkProvider>
       <div className="min-h-screen bg-[#F9FAFB] font-sans text-gray-800">
+        <OnboardingGuide />
         <Header />
         
         <main className="flex-1 max-w-[1280px] mx-auto px-12 py-12 flex gap-8">

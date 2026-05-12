@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { BarChart3, Monitor, ClipboardList, Users, Upload, CheckCircle2, Loader2, Info } from 'lucide-react';
+import { BarChart3, Monitor, ClipboardList, Users, Upload, CheckCircle2, Loader2, Info, Zap } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import { 
   parseCampaignCSV, 
@@ -200,6 +200,36 @@ export const UploadPanel = () => {
             <span>Run Diagnosis</span>
           )}
         </button>
+      </div>
+
+      <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+        <h3 className="text-gray-900 text-[14px] font-semibold mb-4 flex items-center gap-2">
+          <Zap size={16} className="text-emerald-500" />
+          Quick Start Guide
+        </h3>
+        <div className="space-y-4">
+          <div className="flex gap-4">
+            <div className="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0 mt-0.5">1</div>
+            <div>
+              <p className="text-[13px] font-medium text-gray-800">Select Vertical</p>
+              <p className="text-[11px] text-gray-500 mt-1">Pick your industry in the header to load specific benchmarks.</p>
+            </div>
+          </div>
+          <div className="flex gap-4">
+            <div className="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0 mt-0.5">2</div>
+            <div>
+              <p className="text-[13px] font-medium text-gray-800">Load Simulation</p>
+              <p className="text-[11px] text-gray-500 mt-1">Use "Test Scenarios" dropdown (blue button in header) for instant demo data.</p>
+            </div>
+          </div>
+          <div className="flex gap-4">
+            <div className="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0 mt-0.5">3</div>
+            <div>
+              <p className="text-[13px] font-medium text-gray-800">Review Bottleneck</p>
+              <p className="text-[11px] text-gray-500 mt-1">Our agent flags the most upstream issue that needs fixing first.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="bg-blue-50 border border-blue-100 rounded-lg p-4">
