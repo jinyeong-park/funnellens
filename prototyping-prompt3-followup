@@ -1,0 +1,41 @@
+Create a media buying optimization dashboard for lead generation (lawyer/mass tort cases).
+
+**CRITICAL: Decision Flow Logic (Priority Order)**
+
+The dashboard MUST enforce this diagnostic order:
+
+STEP 1 - Check CPM first:
+IF CPM is high (>$30 or above historical average):
+   → STOP. Do NOT check CPC, CTR, CPL, or CPA yet.
+   → Show alert: "CPM is high. Fix targeting first. You are bidding on the wrong audience or an audience that costs too much. Change audience before looking at anything else."
+   → Hide or gray out other diagnostics until CPM is fixed.
+
+STEP 2 - Only after CPM is acceptable, check CPC:
+IF CPC is high (>$10 or above target):
+   → Show alert: "CPC is high. Fix ad creative/targeting match. Ads may be burning out. Kill ads and test new creatives."
+   → Do NOT proceed to CPL/CPA checks yet.
+
+STEP 3 - Only after CPC is acceptable, check CPL:
+IF CPL is high (>$40 or above target):
+   → Show alert: "CPL is high. Landing page or offer is wrong. People click but don't convert. Fix form, offer, or page experience."
+
+STEP 4 - Only after CPL is acceptable, check CPA:
+IF CPA is high (>$2250 or above target):
+   → Show alert: "CPA is high. Funnel or sales team issue. Leads are coming in but not signing cases."
+
+**Metrics to track daily:**
+- CPM = (Spend / Impressions) * 1000
+- CPC = Spend / Clicks
+- CTR = (Clicks / Impressions) * 100
+- CPL = Spend / Leads
+- CPA = Spend / Signed Cases (NORTHSTAR)
+
+**Northstar:** CPA (Cost per signed case)
+All decisions optimize toward lowering CPA. But you FIX in order: CPM → CPC → CPL → CPA.
+
+**Visual requirement:**
+- Show a decision tree or flow chart on the dashboard
+- Highlight which step is currently failing
+- Do NOT show "fix all" suggestions. Show ONLY the fix for the FIRST failed metric.
+
+**Use the existing sample data already loaded. Do not create new sample data.**
