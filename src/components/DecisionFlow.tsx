@@ -42,7 +42,7 @@ export const DecisionFlow: React.FC<DecisionFlowProps> = ({ steps }) => {
                     ) : (
                       <Circle size={11} />
                     )}
-                    Step {index + 1} • {step.id.toUpperCase()}
+                    Step {index + 1}
                   </div>
                   <h4 className="text-[13px] font-bold text-gray-900 leading-tight">
                     {step.label.includes('. ') ? step.label.split('. ')[1].split(' (')[0] : step.label}
@@ -62,6 +62,12 @@ export const DecisionFlow: React.FC<DecisionFlowProps> = ({ steps }) => {
                 </div>
               </div>
             </div>
+
+            {index < steps.length - 1 && (
+              <div className="flex lg:hidden items-center justify-center -my-2 opacity-30">
+                <div className="w-0.5 h-4 bg-gray-300" />
+              </div>
+            )}
 
             {index < steps.length - 1 && (
               <div className="hidden lg:flex items-center justify-center py-4">

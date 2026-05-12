@@ -148,22 +148,22 @@ const EditThresholdsModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: ()
       <motion.div 
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        className="relative bg-white rounded-xl shadow-2xl w-full max-w-[560px] flex flex-col max-h-[80vh] overflow-hidden"
+        className="relative bg-white rounded-xl shadow-2xl w-full max-w-[560px] flex flex-col max-h-[90vh] sm:max-h-[80vh] overflow-hidden"
       >
-        <div className="p-6 border-b border-gray-100 flex items-center justify-between">
+        <div className="p-4 sm:p-6 border-b border-gray-100 flex items-center justify-between shrink-0">
           <div>
-            <h2 className="text-lg font-semibold text-gray-800">Edit Benchmarks — {activeBenchmarks.name}</h2>
-            <p className="text-[13px] text-gray-400 mt-0.5">Changes are logged. Defaults can be restored anytime.</p>
+            <h2 className="text-[16px] sm:text-lg font-semibold text-gray-800">Edit Benchmarks — {activeBenchmarks.name}</h2>
+            <p className="text-[11px] sm:text-[13px] text-gray-400 mt-0.5">Changes are logged. Defaults can be restored anytime.</p>
           </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600"><X size={20} /></button>
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 p-2"><X size={20} /></button>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-0">
-          <table className="w-full text-[13px]">
+        <div className="flex-1 overflow-y-auto p-0 sm:px-2">
+          <table className="w-full text-[12px] sm:text-[13px]">
             <thead className="bg-gray-50 sticky top-0 z-10 border-b border-gray-100">
               <tr>
-                <th className="px-6 py-3 text-left font-semibold text-gray-500">Metric Name</th>
-                <th className="px-6 py-3 text-right font-semibold text-gray-500">Value</th>
+                <th className="px-4 sm:px-6 py-3 text-left font-semibold text-gray-500">Metric Name</th>
+                <th className="px-4 sm:px-6 py-3 text-right font-semibold text-gray-500">Value</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
@@ -180,36 +180,36 @@ const EditThresholdsModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: ()
           </table>
         </div>
 
-        <div className="p-6 border-t border-gray-100 bg-gray-50/50 flex flex-col gap-4">
+        <div className="p-4 sm:p-6 border-t border-gray-100 bg-gray-50/50 flex flex-col gap-4 shrink-0">
           <div>
-            <label className="text-[12px] font-semibold text-gray-500 mb-1.5 block">Reason for change <span className="text-red-400">*</span></label>
+            <label className="text-[11px] sm:text-[12px] font-semibold text-gray-500 mb-1.5 block">Reason for change <span className="text-red-400">*</span></label>
             <input 
               type="text" 
               placeholder="e.g., Client specific Q2 goals"
               value={reason}
               onChange={(e) => setReason(e.target.value)}
-              className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-[13px] focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+              className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
             />
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0">
             <button 
               onClick={handleReset}
-              className="flex items-center gap-1.5 text-gray-400 hover:text-gray-600 text-[13px] font-medium px-2 py-1 transition-all"
+              className="flex items-center gap-1.5 text-gray-400 hover:text-gray-600 text-[12px] sm:text-[13px] font-medium px-2 py-1 transition-all order-2 sm:order-1"
             >
               <RotateCcw size={14} />
               Reset to Defaults
             </button>
-            <div className="flex gap-3">
+            <div className="flex gap-2 sm:gap-3 w-full sm:w-auto order-1 sm:order-2">
               <button 
                 onClick={onClose}
-                className="px-5 py-2.5 text-[13px] font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition-all"
+                className="flex-1 sm:flex-none px-4 py-2 sm:px-5 sm:py-2.5 text-[12px] sm:text-[13px] font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition-all"
               >
                 Cancel
               </button>
               <button 
                 onClick={handleSave}
                 disabled={!reason}
-                className="px-5 py-2.5 text-[13px] font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                className="flex-1 sm:flex-none px-4 py-2 sm:px-5 sm:py-2.5 text-[12px] sm:text-[13px] font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm disabled:opacity-50 disabled:cursor-not-allowed transition-all"
               >
                 Save Changes
               </button>

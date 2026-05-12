@@ -113,8 +113,8 @@ export const Header = () => {
   };
 
   return (
-    <header className="h-16 border-b border-gray-100 bg-white flex items-center justify-between px-12 sticky top-0 z-40">
-      <div className="flex items-center gap-12">
+    <header className="min-h-[4rem] border-b border-gray-100 bg-white flex flex-col md:flex-row items-center justify-between px-4 sm:px-6 lg:px-12 py-3 md:py-0 sticky top-0 z-40 gap-4">
+      <div className="flex items-center justify-between w-full md:w-auto gap-4 lg:gap-12">
         <button 
           onClick={() => {
             setCampaignData(null);
@@ -123,7 +123,7 @@ export const Header = () => {
             setSalesData(null);
             setResults(null);
           }}
-          className="flex items-center gap-4 hover:opacity-90 transition-opacity text-left cursor-pointer group"
+          className="flex items-center gap-3 sm:gap-4 hover:opacity-90 transition-opacity text-left cursor-pointer group shrink-0"
         >
           <motion.div 
             initial={{ rotate: -5, scale: 0.9 }}
@@ -131,12 +131,12 @@ export const Header = () => {
             whileHover={{ scale: 1.05, rotate: 2 }}
             className="relative"
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-800 rounded-xl flex items-center justify-center shadow-lg shadow-blue-600/30 relative overflow-hidden">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-800 rounded-xl flex items-center justify-center shadow-lg shadow-blue-600/30 relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent opacity-40" />
               
               <div className="relative z-10 font-black flex items-baseline select-none">
-                <span className="text-white text-[20px] leading-none tracking-tighter">F</span>
-                <span className="text-blue-200 text-[16px] leading-none tracking-tighter -ml-1 shadow-sm">L</span>
+                <span className="text-white text-[16px] sm:text-[20px] leading-none tracking-tighter">F</span>
+                <span className="text-blue-200 text-[12px] sm:text-[16px] leading-none tracking-tighter -ml-1 shadow-sm">L</span>
               </div>
               
               {/* Glass flare effect */}
@@ -155,16 +155,14 @@ export const Header = () => {
                 className="absolute inset-x-0 h-1/3 bg-white/20 blur-lg pointer-events-none"
               />
             </div>
-            {/* Outer lens ring */}
-            <div className="absolute -inset-1.5 border border-blue-100 rounded-2xl opacity-40 group-hover:scale-110 group-hover:opacity-100 transition-all duration-500 pointer-events-none" />
           </motion.div>
 
           <div className="flex flex-col">
-            <h1 className="text-[22px] font-black tracking-tight leading-none text-gray-900 bg-clip-text">
+            <h1 className="text-[18px] sm:text-[22px] font-black tracking-tight leading-none text-gray-900 bg-clip-text">
               FunnelLens
             </h1>
-            <div className="flex items-center gap-1.5 mt-1.5">
-              <span className="text-[9px] uppercase tracking-[0.2em] font-black text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">
+            <div className="flex items-center gap-1.5 mt-1 sm:mt-1.5">
+              <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.1em] sm:tracking-[0.2em] font-black text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">
                 Diagnostic Agent
               </span>
               <div className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
@@ -172,13 +170,13 @@ export const Header = () => {
           </div>
         </button>
 
-        <div className="relative group">
+        <div className="relative group hidden sm:block">
           <p className="text-[10px] text-gray-400 uppercase tracking-widest font-semibold mb-1">Vertical</p>
           <div className="relative">
             <select 
               value={activeVertical}
               onChange={(e) => handleVerticalChange(e.target.value)}
-              className="appearance-none bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 pr-8 text-[13px] font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all cursor-pointer min-w-[220px]"
+              className="appearance-none bg-gray-50 border border-gray-200 rounded-md px-3 py-1.5 pr-8 text-[13px] font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all cursor-pointer min-w-[140px] lg:min-w-[220px]"
             >
               {Object.values(BENCHMARK_DEFAULTS).map(v => (
                 <option key={v.id} value={v.id}>{v.name}</option>
@@ -188,13 +186,27 @@ export const Header = () => {
           </div>
         </div>
       </div>
-      <div className="flex gap-4 items-center">
-        <div className="flex flex-col items-end">
-          <p className="text-[10px] text-gray-400 uppercase tracking-widest font-semibold mb-1">Test Scenarios</p>
+
+      <div className="flex gap-4 items-center w-full md:w-auto justify-between md:justify-end overflow-x-auto pb-1 md:pb-0 scrollbar-hide">
+        <div className="relative group sm:hidden min-w-[120px]">
+          <p className="text-[9px] text-gray-400 uppercase tracking-widest font-semibold mb-1">Vertical</p>
+          <select 
+            value={activeVertical}
+            onChange={(e) => handleVerticalChange(e.target.value)}
+            className="appearance-none bg-gray-50 border border-gray-200 rounded-md px-2 py-1 text-[11px] font-medium text-gray-700 w-full"
+          >
+            {Object.values(BENCHMARK_DEFAULTS).map(v => (
+              <option key={v.id} value={v.id}>{v.name}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className="flex flex-col items-end shrink-0">
+          <p className="text-[9px] sm:text-[10px] text-gray-400 uppercase tracking-widest font-semibold mb-1">Test Scenarios</p>
           <div className="relative">
             <select 
               onChange={(e) => loadScenario(e.target.value as any)}
-              className={`appearance-none border rounded-md px-3 py-1.5 text-[12px] font-bold focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all cursor-pointer min-w-[140px] ${
+              className={`appearance-none border rounded-md px-2 sm:px-3 py-1 sm:py-1.5 text-[11px] sm:text-[12px] font-bold focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all cursor-pointer min-w-[120px] sm:min-w-[140px] ${
                 isDataEmpty 
                   ? 'bg-blue-600 border-blue-700 text-white animate-pulse shadow-lg ring-4 ring-blue-500/20' 
                   : 'bg-blue-50/50 border-blue-100 text-blue-600'
@@ -212,7 +224,7 @@ export const Header = () => {
         </div>
         <button 
           onClick={downloadTemplates}
-          className="px-3 py-1.5 text-[13px] text-gray-600 font-medium hover:bg-gray-50 rounded transition-colors whitespace-nowrap"
+          className="hidden lg:block px-3 py-1.5 text-[13px] text-gray-600 font-medium hover:bg-gray-50 rounded transition-colors whitespace-nowrap shrink-0"
         >
           Download Templates
         </button>

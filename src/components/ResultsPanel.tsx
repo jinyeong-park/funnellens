@@ -15,10 +15,10 @@ const MetricCard = ({ label, value, status, hasBorder = true }: { label: string,
   };
 
   return (
-    <div className={cn("p-5 flex-1 bg-gray-50/50", hasBorder && "border-r border-gray-100")}>
+    <div className={cn("p-5 flex-1 bg-gray-50/50", hasBorder && "sm:border-r border-gray-100 border-b sm:border-b-0")}>
       <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold mb-1">{label}</p>
       <div className="flex items-baseline gap-2">
-        <span className="text-[24px] font-semibold tracking-tight text-gray-900 leading-none">{value}</span>
+        <span className="text-[20px] sm:text-[24px] font-semibold tracking-tight text-gray-900 leading-none">{value}</span>
         <div className={cn("w-2 h-2 rounded-full", dotColor[status])} />
       </div>
     </div>
@@ -167,7 +167,7 @@ export const ResultsPanel = () => {
       </div>
 
       {/* 2. Summary Metrics */}
-      <div className={cn("grid grid-cols-4 border-b border-gray-100 bg-gray-50/20", firstFailureId && firstFailureId !== 'cpa' && "opacity-40 grayscale pointer-events-none")}>
+      <div className={cn("grid grid-cols-2 lg:grid-cols-4 border-b border-gray-100 bg-gray-50/20", firstFailureId && firstFailureId !== 'cpa' && "opacity-40 grayscale pointer-events-none")}>
         <MetricCard 
           label="Total Spend" 
           value={`$${(results.metrics.totalSpend / 1000).toFixed(1)}k`} 
@@ -193,9 +193,9 @@ export const ResultsPanel = () => {
 
       <div className={cn("flex-1 flex flex-col", firstFailureId && firstFailureId !== 'cpa' && "opacity-40 grayscale pointer-events-none")}>
         {/* 3. Root Causes */}
-        <div className="px-6 pt-5">
-          <h3 className="text-[15px] font-semibold mb-3">Secondary Level Findings</h3>
-          <div className="flex flex-wrap gap-3">
+        <div className="px-4 sm:px-6 pt-5">
+          <h3 className="text-[14px] sm:text-[15px] font-semibold mb-3">Secondary Level Findings</h3>
+          <div className="flex flex-wrap gap-2 sm:gap-3">
             {results.rootCauses.map((rc, i) => (
               <RootCauseCard key={i} title={rc.title} severity={rc.severity} icon={rc.icon} />
             ))}
@@ -206,9 +206,9 @@ export const ResultsPanel = () => {
         </div>
 
         {/* 3. Findings List */}
-        <div className="px-6 mt-8">
-          <h3 className="text-[15px] font-semibold mb-2">Findings</h3>
-          <div className="border-t border-gray-100">
+        <div className="px-4 sm:px-6 mt-6 sm:mt-8">
+          <h3 className="text-[14px] sm:text-[15px] font-semibold mb-2">Findings</h3>
+          <div className="border-t border-gray-100 px-1">
             {results.findings.length > 0 ? (
               results.findings.map((f) => (
                 <FindingRow key={f.id} title={f.title} detail={f.detail} severity={f.severity} />
@@ -222,18 +222,22 @@ export const ResultsPanel = () => {
         </div>
 
         {/* 4. Recommendations */}
-        <div className="px-6 mt-8 pb-6">
-          <h3 className="text-[15px] font-semibold mb-3">Recommendations</h3>
-          <div className="space-y-2">
+        <div className="px-4 sm:px-6 mt-6 sm:mt-8 pb-6">
+          <h3 className="text-[14px] sm:text-[15px] font-semibold mb-3">Recommendations</h3>
+          <div className="space-y-3">
             {results.recommendations.map((r, i) => (
-              <div key={r.id} className="flex items-center p-3 border border-gray-100 rounded-lg hover:border-blue-100 transition-colors">
-                <div className="w-5 h-5 bg-blue-100 text-[#2563EB] text-[11px] font-bold flex items-center justify-center rounded-full mr-4">
-                  {i + 1}
+              <div key={r.id} className="flex flex-col sm:flex-row sm:items-center p-3 sm:p-4 border border-gray-100 rounded-lg hover:border-blue-100 transition-colors gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-5 h-5 bg-blue-100 text-[#2563EB] text-[11px] font-bold flex items-center justify-center rounded-full shrink-0">
+                    {i + 1}
+                  </div>
+                  <span className="text-[13px] sm:text-[14px] font-medium sm:font-normal text-gray-800 leading-tight">{r.text}</span>
                 </div>
-                <span className="text-[14px] flex-1 font-normal text-gray-800">{r.text}</span>
-                <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 text-[10px] font-semibold rounded-full uppercase tracking-wider">
-                  {r.impact} Impact
-                </span>
+                <div className="sm:ml-auto">
+                  <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 text-[9px] sm:text-[10px] font-bold rounded-full uppercase tracking-wider">
+                    {r.impact} Impact
+                  </span>
+                </div>
               </div>
             ))}
           </div>
