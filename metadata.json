@@ -1,0 +1,6 @@
+{
+  "name": "Legal Diagnostic Agent",
+  "description": "Media buying diagnostic tool for legal lead generation. Ingests campaign, landing page, form, and sales data to identify funnel bottlenecks and root causes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
