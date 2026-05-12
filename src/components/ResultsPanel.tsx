@@ -8,67 +8,67 @@ import { DecisionFlow } from './DecisionFlow';
 
 const MetricCard = ({ label, value, status, hasBorder = true }: { label: string, value: string, status: Severity, hasBorder?: boolean }) => {
   const dotColor = {
-    good: 'bg-[#10B981]',
-    warning: 'bg-[#F59E0B]',
-    critical: 'bg-[#EF4444]',
-    info: 'bg-[#6366F1]'
+    good: 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]',
+    warning: 'bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)]',
+    critical: 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]',
+    info: 'bg-blue-600 shadow-[0_0_8px_rgba(37,99,235,0.5)]'
   };
 
   return (
-    <div className={cn("p-5 flex-1 bg-gray-50/50", hasBorder && "sm:border-r border-gray-100 border-b sm:border-b-0")}>
-      <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold mb-1">{label}</p>
-      <div className="flex items-baseline gap-2">
-        <span className="text-[20px] sm:text-[24px] font-semibold tracking-tight text-gray-900 leading-none">{value}</span>
-        <div className={cn("w-2 h-2 rounded-full", dotColor[status])} />
+    <div className={cn(
+      "p-6 flex-1 bg-white relative group transition-all duration-300", 
+      hasBorder && "sm:border-r border-gray-100 border-b sm:border-b-0"
+    )}>
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/0 to-blue-50/30 opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className="relative z-10">
+        <p className="text-[10px] text-gray-400 uppercase tracking-widest font-black mb-2">{label}</p>
+        <div className="flex items-center gap-2.5">
+          <span className="text-[20px] sm:text-[26px] font-black tracking-tight text-slate-900 leading-none">{value}</span>
+          <div className={cn("w-1.5 h-1.5 rounded-full animate-pulse", dotColor[status])} />
+        </div>
       </div>
     </div>
   );
 };
 
-const FindingRow = ({ title, detail, severity }: { title: string, detail: string, severity: Severity, key?: string }) => {
-  const statusColor = {
-    critical: 'bg-red-500 border-red-100',
-    warning: 'bg-amber-500 border-amber-100',
-    info: 'bg-blue-500 border-blue-100',
-    good: 'bg-emerald-500 border-emerald-100'
+const FindingRow = ({ title, detail, severity }: { title: string, detail: string, severity: Severity }) => {
+  const styles = {
+    critical: 'bg-red-50 text-red-700 border-red-100',
+    warning: 'bg-amber-50 text-amber-700 border-amber-100',
+    info: 'bg-blue-50 text-blue-700 border-blue-100',
+    good: 'bg-emerald-50 text-emerald-700 border-emerald-100'
   };
 
   return (
-    <div className="flex items-center py-3 px-2 border-b border-gray-50 hover:bg-gray-50 transition-colors">
-      <span className={cn("w-4 h-4 rounded-full mr-3 border-4", statusColor[severity])}></span>
-      <span className="text-[14px] flex-1 font-medium text-gray-800">{title}</span>
-      <span className="text-[13px] text-gray-500">{detail}</span>
+    <div className="flex items-center gap-4 py-3.5 px-4 rounded-xl border border-transparent hover:border-gray-100 hover:bg-gray-50/50 transition-all duration-200">
+      <div className={cn("w-2 h-2 rounded-full shrink-0", 
+        severity === 'critical' ? 'bg-red-500' : 
+        severity === 'warning' ? 'bg-amber-500' : 
+        severity === 'info' ? 'bg-blue-500' : 'bg-emerald-500'
+      )} />
+      <div className="flex-1 min-w-0">
+        <p className="text-[14px] font-bold text-slate-800 leading-tight mb-0.5">{title}</p>
+        <p className="text-[12px] text-slate-400 truncate font-medium">{detail}</p>
+      </div>
+      <span className={cn("px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider border", styles[severity])}>
+        {severity}
+      </span>
     </div>
   );
 };
 
-const RootCauseCard = ({ title, severity, icon }: { title: string, severity: Severity, icon: string, key?: React.Key }) => {
-  const IconMap: Record<string, React.ReactNode> = {
-    zap: <Zap size={14} />,
-    monitor: <Monitor size={14} />,
-    filter: <Filter size={14} />,
-    phone: <Phone size={14} />,
-    tag: <Tag size={14} />
-  };
-
+const RootCauseCard = ({ title, severity }: { title: string, severity: Severity, icon: string }) => {
   const styleMap = {
-    critical: "bg-red-50 text-red-700 border-red-200",
-    warning: "bg-amber-50 text-amber-700 border-amber-200",
-    good: "bg-emerald-50 text-emerald-700 border-emerald-200",
-    info: "bg-blue-50 text-blue-700 border-blue-200"
-  };
-
-  const dotColor = {
-    critical: 'text-red-500',
-    warning: 'text-amber-500',
-    good: 'text-emerald-500',
-    info: 'text-blue-500'
+    critical: "bg-white text-red-600 border-red-100 shadow-sm",
+    warning: "bg-white text-amber-600 border-amber-100 shadow-sm",
+    good: "bg-white text-emerald-600 border-emerald-100 shadow-sm",
+    info: "bg-white text-blue-600 border-blue-100 shadow-sm"
   };
 
   return (
-    <div className={cn("flex items-center px-4 py-2 border rounded-lg", styleMap[severity])}>
-      <span className={cn("mr-2 text-[10px]", dotColor[severity])}>●</span>
-      <span className="text-[13px] font-medium">{title}</span>
+    <div className={cn("flex items-center px-3.5 py-1.5 border rounded-full transition-all hover:scale-105 cursor-default", styleMap[severity])}>
+      <span className="w-1.5 h-1.5 rounded-full mr-2 bg-current" />
+      <span className="text-[12px] font-black tracking-tight">{title}</span>
     </div>
   );
 };
@@ -155,19 +155,30 @@ export const ResultsPanel = () => {
   const firstFailureId = results.decisionFlow.find(s => s.isFirstFailure)?.id;
 
   return (
-    <section className="flex-1 flex flex-col bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+    <section className="flex-1 flex flex-col bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative">
+      <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50/30 blur-3xl -mr-16 -mt-16 rounded-full" />
+      
       {/* 0. Header with Vertical Name */}
-      <div className="px-6 py-3 border-b border-gray-100 bg-gray-50/30">
-        <p className="text-[10px] text-gray-500 uppercase tracking-widest font-bold">Diagnostic Results — {activeBenchmarks.name}</p>
+      <div className="px-8 py-5 border-b border-gray-100 flex items-center justify-between relative z-10">
+        <div className="flex items-center gap-3">
+          <div className="w-2 h-2 rounded-full bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.4)]" />
+          <h2 className="text-[13px] font-black text-slate-800 uppercase tracking-widest">Diagnostic Report</h2>
+        </div>
+        <div className="flex items-center gap-2 px-3 py-1 bg-slate-950 rounded-full">
+           <span className="text-[10px] text-white font-bold tracking-tight">{activeBenchmarks.name} Analysis</span>
+        </div>
       </div>
 
       {/* 1. Decision Flow */}
-      <div className="border-b border-gray-100">
+      <div className="border-b border-gray-100 bg-white shadow-sm relative z-10">
         <DecisionFlow steps={results.decisionFlow} />
       </div>
 
       {/* 2. Summary Metrics */}
-      <div className={cn("grid grid-cols-2 lg:grid-cols-4 border-b border-gray-100 bg-gray-50/20", firstFailureId && firstFailureId !== 'cpa' && "opacity-40 grayscale pointer-events-none")}>
+      <div className={cn(
+        "grid grid-cols-2 lg:grid-cols-4 border-b border-gray-100", 
+        firstFailureId && firstFailureId !== 'cpa' && "opacity-40 grayscale pointer-events-none"
+      )}>
         <MetricCard 
           label="Total Spend" 
           value={`$${(results.metrics.totalSpend / 1000).toFixed(1)}k`} 
@@ -184,58 +195,76 @@ export const ResultsPanel = () => {
           status={results.metrics.cvrStatus} 
         />
         <MetricCard 
-          label="CPA (Northstar)" 
+          label="Avg CPA" 
           value={`$${results.metrics.avgCPA.toFixed(0)}`} 
           status={results.metrics.signRateStatus} 
           hasBorder={false}
         />
       </div>
 
-      <div className={cn("flex-1 flex flex-col", firstFailureId && firstFailureId !== 'cpa' && "opacity-40 grayscale pointer-events-none")}>
+      <div className={cn("flex-1 flex flex-col relative z-0", firstFailureId && firstFailureId !== 'cpa' && "opacity-40 grayscale pointer-events-none")}>
         {/* 3. Root Causes */}
-        <div className="px-4 sm:px-6 pt-5">
-          <h3 className="text-[14px] sm:text-[15px] font-semibold mb-3">Secondary Level Findings</h3>
-          <div className="flex flex-wrap gap-2 sm:gap-3">
+        <div className="px-8 pt-8">
+          <div className="flex items-center gap-4 mb-5">
+            <h3 className="text-[15px] font-black tracking-tight text-slate-900 shrink-0">Root Cause Chips</h3>
+            <div className="h-px bg-slate-100 flex-1" />
+          </div>
+          <div className="flex flex-wrap gap-2.5">
             {results.rootCauses.map((rc, i) => (
               <RootCauseCard key={i} title={rc.title} severity={rc.severity} icon={rc.icon} />
             ))}
             {results.rootCauses.length === 0 && (
-              <span className="text-sm text-gray-400 italic">No specific root cause patterns identified.</span>
+              <span className="text-[13px] text-slate-400 italic">Universal funnel health detected. No specific root cause identified.</span>
             )}
           </div>
         </div>
 
         {/* 3. Findings List */}
-        <div className="px-4 sm:px-6 mt-6 sm:mt-8">
-          <h3 className="text-[14px] sm:text-[15px] font-semibold mb-2">Findings</h3>
-          <div className="border-t border-gray-100 px-1">
+        <div className="px-8 mt-10">
+          <div className="flex items-center gap-4 mb-4">
+            <h3 className="text-[15px] font-black tracking-tight text-slate-900 shrink-0">Key Findings</h3>
+            <div className="h-px bg-slate-100 flex-1" />
+          </div>
+          <div className="space-y-1">
             {results.findings.length > 0 ? (
               results.findings.map((f) => (
                 <FindingRow key={f.id} title={f.title} detail={f.detail} severity={f.severity} />
               ))
             ) : (
-              <div className="py-4 px-2 text-sm text-[#10B981] font-medium">
-                No critical issues detected in campaign funnel.
+              <div className="py-6 px-4 bg-emerald-50/50 rounded-xl border border-emerald-100/50 text-[13px] text-emerald-700 font-bold flex items-center gap-3">
+                <CheckCircle2 size={16} />
+                Your funnel metrics are currently within high-performance benchmarks.
               </div>
             )}
           </div>
         </div>
 
         {/* 4. Recommendations */}
-        <div className="px-4 sm:px-6 mt-6 sm:mt-8 pb-6">
-          <h3 className="text-[14px] sm:text-[15px] font-semibold mb-3">Recommendations</h3>
-          <div className="space-y-3">
+        <div className="px-8 mt-10 pb-10">
+          <div className="flex items-center gap-4 mb-5">
+            <h3 className="text-[15px] font-black tracking-tight text-slate-900 shrink-0">Strategy Roadmap</h3>
+            <div className="h-px bg-slate-100 flex-1" />
+          </div>
+          <div className="grid gap-3">
             {results.recommendations.map((r, i) => (
-              <div key={r.id} className="flex flex-col sm:flex-row sm:items-center p-3 sm:p-4 border border-gray-100 rounded-lg hover:border-blue-100 transition-colors gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-5 h-5 bg-blue-100 text-[#2563EB] text-[11px] font-bold flex items-center justify-center rounded-full shrink-0">
+              <div key={r.id} className="group flex flex-col sm:flex-row sm:items-center p-4 sm:p-5 bg-white border border-slate-100 rounded-2xl hover:border-blue-300 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 gap-4">
+                <div className="flex items-start gap-4 flex-1">
+                  <div className="w-7 h-7 bg-slate-900 text-white text-[11px] font-black flex items-center justify-center rounded-lg rotate-3 group-hover:rotate-0 transition-transform shrink-0">
                     {i + 1}
                   </div>
-                  <span className="text-[13px] sm:text-[14px] font-medium sm:font-normal text-gray-800 leading-tight">{r.text}</span>
+                  <div className="flex flex-col gap-1">
+                    <span className="text-[14px] font-bold text-slate-800 leading-tight group-hover:text-blue-700 transition-colors">
+                      {r.text}
+                    </span>
+                    <p className="text-[11px] text-slate-400 font-medium">Implementation priority: Highly Recommended</p>
+                  </div>
                 </div>
-                <div className="sm:ml-auto">
-                  <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 text-[9px] sm:text-[10px] font-bold rounded-full uppercase tracking-wider">
-                    {r.impact} Impact
+                <div className="shrink-0 flex items-center justify-end">
+                  <span className={cn(
+                    "px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter shadow-sm border",
+                    r.impact === 'High' ? 'bg-blue-600 text-white border-blue-700' : 'bg-slate-50 text-slate-500 border-slate-100'
+                  )}>
+                    {r.impact} Impact Scale
                   </span>
                 </div>
               </div>
@@ -245,10 +274,14 @@ export const ResultsPanel = () => {
       </div>
 
       {/* 5. Bottom Actions */}
-      <div className="p-6 border-t border-gray-100 bg-white flex justify-end">
-        <button className="px-4 py-2 border border-gray-200 text-[13px] text-gray-500 font-medium rounded-lg hover:bg-gray-50 flex items-center transition-colors shadow-sm">
+      <div className="px-8 py-6 border-t border-gray-100 bg-white flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="text-[11px] font-bold text-slate-500 uppercase tracking-widest">Agent Live Audit</span>
+        </div>
+        <button className="px-6 py-2.5 bg-slate-950 text-white text-[12px] font-black rounded-xl hover:bg-slate-800 flex items-center transition-all shadow-lg active:scale-95">
           <Download size={14} className="mr-2" />
-          Export Diagnosis Report
+          Export Intelligence Brief
         </button>
       </div>
     </section>
