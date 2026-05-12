@@ -76,6 +76,39 @@ export const Header = () => {
     setActiveVertical(id);
   };
 
+  const downloadTemplates = () => {
+    const templates = [
+      {
+        name: 'campaign_performance.csv',
+        content: 'date,campaign_name,impressions,clicks,spend,leads\n2024-05-01,Campaign_A_GA_Only,35000,350,4200,18\n2024-05-01,Campaign_B_MultiState,70000,2800,8400,70'
+      },
+      {
+        name: 'landing_page_analytics.csv',
+        content: 'date,page_views,form_starts,form_submits,bounce_rate,avg_time_on_page_sec\n2024-05-01,5200,680,88,0.42,65'
+      },
+      {
+        name: 'form_funnel_data.csv',
+        content: 'step,question,type,started,completed\n1,Full Name,friction,680,666\n2,Phone,friction,666,626\n3,Email,friction,626,601\n4,Were you injured?,qualification,601,541\n5,Do you have a lawyer?,qualification,541,460\n6,Describe injury,friction_heavy,460,322'
+      },
+      {
+        name: 'sales_crm_feedback.csv',
+        content: 'total_leads,calls_connected,qualified_calls,cases_signed,sales_feedback\n88,70,14,3,High volume of "already have lawyer" leads'
+      }
+    ];
+
+    templates.forEach(t => {
+      const blob = new Blob([t.content], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.setAttribute('hidden', '');
+      a.setAttribute('href', url);
+      a.setAttribute('download', t.name);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  };
+
   return (
     <header className="h-16 border-b border-gray-100 bg-white flex items-center justify-between px-12 sticky top-0 z-40">
       <div className="flex items-center gap-12">
@@ -116,7 +149,10 @@ export const Header = () => {
             <option value="cpa">Step 4: High CPA</option>
           </select>
         </div>
-        <button className="px-3 py-1.5 text-[13px] text-gray-600 font-medium hover:bg-gray-50 rounded transition-colors whitespace-nowrap">
+        <button 
+          onClick={downloadTemplates}
+          className="px-3 py-1.5 text-[13px] text-gray-600 font-medium hover:bg-gray-50 rounded transition-colors whitespace-nowrap"
+        >
           Download Templates
         </button>
       </div>

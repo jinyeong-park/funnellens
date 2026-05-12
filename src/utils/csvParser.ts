@@ -12,6 +12,7 @@ export const parseCampaignCSV = (file: File): Promise<CampaignData[]> => {
       header: true,
       skipEmptyLines: true,
       dynamicTyping: true,
+      transformHeader: (header) => header.trim(),
       complete: (results) => {
         const required = ['date', 'campaign_name', 'impressions', 'clicks', 'spend', 'leads'];
         const headers = results.meta.fields || [];
@@ -34,6 +35,7 @@ export const parseLandingCSV = (file: File): Promise<LandingPageData[]> => {
       header: true,
       skipEmptyLines: true,
       dynamicTyping: true,
+      transformHeader: (header) => header.trim(),
       complete: (results) => {
         const required = ['date', 'page_views', 'form_starts', 'form_submits', 'bounce_rate', 'avg_time_on_page_sec'];
         const headers = results.meta.fields || [];
@@ -56,6 +58,7 @@ export const parseFormCSV = (file: File): Promise<FormQuestionData[]> => {
       header: true,
       skipEmptyLines: true,
       dynamicTyping: true,
+      transformHeader: (header) => header.trim(),
       complete: (results) => {
         const required = ['step', 'question', 'type', 'started', 'completed'];
         const headers = results.meta.fields || [];
@@ -78,6 +81,7 @@ export const parseSalesCSV = (file: File): Promise<SalesData> => {
       header: true,
       skipEmptyLines: true,
       dynamicTyping: true,
+      transformHeader: (header) => header.trim(),
       complete: (results) => {
         const required = ['total_leads', 'calls_connected', 'qualified_calls', 'cases_signed'];
         const headers = results.meta.fields || [];

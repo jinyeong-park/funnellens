@@ -1,0 +1,7 @@
+step,question,type,started,completed
+1,Full Name,friction,680,666
+2,Phone,friction,666,626
+3,Email,friction,626,601
+4,Were you injured?,qualification,601,541
+5,Do you have a lawyer?,qualification,541,460
+6,Describe injury,friction_heavy,460,322
