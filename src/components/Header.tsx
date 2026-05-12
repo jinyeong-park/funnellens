@@ -7,12 +7,13 @@ import {
   FormQuestionData, 
   SalesData 
 } from '../types';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Zap, Activity } from 'lucide-react';
 import { useState } from 'react';
+import { motion } from 'motion/react';
 import { Toast } from './Toast';
 
 export const Header = () => {
-  const { setCampaignData, setLandingData, setFormData, setSalesData, campaignData } = useStore();
+  const { setCampaignData, setLandingData, setFormData, setSalesData, campaignData, setResults } = useStore();
   const { activeVertical, setActiveVertical, activeBenchmarks } = useBenchmarks();
   const [showVerticalToast, setShowVerticalToast] = useState(false);
 
@@ -114,10 +115,62 @@ export const Header = () => {
   return (
     <header className="h-16 border-b border-gray-100 bg-white flex items-center justify-between px-12 sticky top-0 z-40">
       <div className="flex items-center gap-12">
-        <div>
-          <h1 className="text-[18px] font-semibold leading-tight tracking-tight text-gray-900">Diagnostic Agent</h1>
-          <p className="text-[11px] text-gray-400 uppercase tracking-widest font-medium mt-0.5">Legal Lead Gen Media Buying</p>
-        </div>
+        <button 
+          onClick={() => {
+            setCampaignData(null);
+            setLandingData(null);
+            setFormData(null);
+            setSalesData(null);
+            setResults(null);
+          }}
+          className="flex items-center gap-4 hover:opacity-90 transition-opacity text-left cursor-pointer group"
+        >
+          <motion.div 
+            initial={{ rotate: -5, scale: 0.9 }}
+            animate={{ rotate: 0, scale: 1 }}
+            whileHover={{ scale: 1.05, rotate: 2 }}
+            className="relative"
+          >
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-800 rounded-xl flex items-center justify-center shadow-lg shadow-blue-600/30 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent opacity-40" />
+              
+              <div className="relative z-10 font-black flex items-baseline select-none">
+                <span className="text-white text-[20px] leading-none tracking-tighter">F</span>
+                <span className="text-blue-200 text-[16px] leading-none tracking-tighter -ml-1 shadow-sm">L</span>
+              </div>
+              
+              {/* Glass flare effect */}
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/20 via-transparent to-transparent pointer-events-none" />
+              
+              {/* Animated scanning line */}
+              <motion.div 
+                animate={{ 
+                  top: ['-100%', '200%'],
+                }}
+                transition={{ 
+                  duration: 2.5, 
+                  repeat: Infinity, 
+                  ease: "linear" 
+                }}
+                className="absolute inset-x-0 h-1/3 bg-white/20 blur-lg pointer-events-none"
+              />
+            </div>
+            {/* Outer lens ring */}
+            <div className="absolute -inset-1.5 border border-blue-100 rounded-2xl opacity-40 group-hover:scale-110 group-hover:opacity-100 transition-all duration-500 pointer-events-none" />
+          </motion.div>
+
+          <div className="flex flex-col">
+            <h1 className="text-[22px] font-black tracking-tight leading-none text-gray-900 bg-clip-text">
+              FunnelLens
+            </h1>
+            <div className="flex items-center gap-1.5 mt-1.5">
+              <span className="text-[9px] uppercase tracking-[0.2em] font-black text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">
+                Diagnostic Agent
+              </span>
+              <div className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
+            </div>
+          </div>
+        </button>
 
         <div className="relative group">
           <p className="text-[10px] text-gray-400 uppercase tracking-widest font-semibold mb-1">Vertical</p>
@@ -149,11 +202,11 @@ export const Header = () => {
               defaultValue=""
             >
               <option value="" disabled className="text-gray-900">Load Scenario...</option>
-              <option value="healthy" className="text-gray-900">Healthy Funnel</option>
-              <option value="cpm" className="text-gray-900">Step 1: High CPM</option>
-              <option value="cpc" className="text-gray-900">Step 2: High CPC</option>
-              <option value="cpl" className="text-gray-900">Step 3: High CPL</option>
-              <option value="cpa" className="text-gray-900">Step 4: High CPA</option>
+              <option value="healthy" className="text-gray-900">Case: Healthy Funnel</option>
+              <option value="cpm" className="text-gray-900">Case 1: High Ad Costs (CPM)</option>
+              <option value="cpc" className="text-gray-900">Case 2: Poor Ad Interest (CPC)</option>
+              <option value="cpl" className="text-gray-900">Case 3: Landing Page Leaks (CPL)</option>
+              <option value="cpa" className="text-gray-900">Case 4: Sales Closing Issues (CPA)</option>
             </select>
           </div>
         </div>

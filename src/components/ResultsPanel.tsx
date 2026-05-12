@@ -122,6 +122,28 @@ export const ResultsPanel = () => {
           </div>
         </div>
 
+        <div className="mt-12 w-full max-w-[600px] border-t border-gray-100 pt-8">
+          <h4 className="text-[12px] font-bold text-gray-400 uppercase tracking-widest mb-6">Simple Terms Guide</h4>
+          <div className="grid grid-cols-2 gap-x-8 gap-y-6 text-left">
+            <div>
+              <p className="text-[13px] font-bold text-gray-800 mb-1">CPM (Ad Visibility)</p>
+              <p className="text-[11px] text-gray-500 leading-relaxed">Cost to be seen. High CPM means your target audience is expensive or hard to reach.</p>
+            </div>
+            <div>
+              <p className="text-[13px] font-bold text-gray-800 mb-1">CPC (Interest Cost)</p>
+              <p className="text-[11px] text-gray-500 leading-relaxed">Cost per click. High CPC usually means your ad creative isn't catching people's attention.</p>
+            </div>
+            <div>
+              <p className="text-[13px] font-bold text-gray-800 mb-1">CPL (Lead Cost)</p>
+              <p className="text-[11px] text-gray-500 leading-relaxed">Cost to get a contact. High CPL means your landing page or form is scaring people away.</p>
+            </div>
+            <div>
+              <p className="text-[13px] font-bold text-gray-800 mb-1">CPA (Client Cost)</p>
+              <p className="text-[11px] text-gray-500 leading-relaxed">Cost to sign a client. This is the ultimate 'Northstar' metric for your business.</p>
+            </div>
+          </div>
+        </div>
+
         <div className="mt-12 flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-100 rounded-full">
           <Info size={14} className="text-blue-600" />
           <span className="text-[12px] font-medium text-blue-700">Currently testing for: {activeBenchmarks.name} vertical</span>

@@ -114,6 +114,8 @@ export const BenchmarkProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     if (campaignData || landingData || formData || salesData) {
       const results = runDiagnostic(campaignData, landingData, formData, salesData, activeBenchmarks);
       setResults(results);
+    } else {
+      setResults(null);
     }
   }, [activeBenchmarks, campaignData, landingData, formData, salesData, setResults]);
 

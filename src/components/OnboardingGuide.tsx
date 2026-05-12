@@ -22,25 +22,25 @@ export const OnboardingGuide = () => {
   const guides = [
     {
       title: "Welcome to FunnelLens",
-      description: "Our agent uses a priority diagnostic flow to find the EXACT bottleneck in your funnel, from targeting to sales.",
+      description: "We help you find exactly where your marketing budget is being wasted. Think of your marketing like a pipe—we find the leaks.",
       icon: <Activity className="text-blue-500" size={32} />,
       color: "bg-blue-50"
     },
     {
-      title: "Priority Flow Design",
-      description: "We diagnostic CPM → CPC → CPL → CPA in order. High CPM? Don't fix the creative. High CPL? Don't fix the sales team. Fix the root cause first.",
+      title: "The Step-by-Step Logic",
+      description: "We check your funnel from top to bottom. If the top (Targeting) is broken, we tell you to fix that first before worrying about the bottom (Sales).",
       icon: <Zap className="text-emerald-500" size={32} />,
       color: "bg-emerald-50"
     },
     {
-      title: "Dynamic Benchmarks",
-      description: "We compare your performance against vertical-specific benchmarks. You can customize them in the settings panel.",
+      title: "Smart Benchmarks",
+      description: "We compare your performance against what's normal for your industry. You'll see instantly if your costs are 'Good' or 'Warning'.",
       icon: <Target className="text-purple-500" size={32} />,
       color: "bg-purple-50"
     },
     {
-      title: "Get Started Now",
-      description: "Use the 'Test Scenarios' in the header to see the engine in action, or upload your own CSV data.",
+      title: "Ready to Explore?",
+      description: "Use the 'Test Scenarios' (the pulsing blue button) at the top to see a live demo of how we catch bottlenecks.",
       icon: <ShieldCheck className="text-blue-500" size={32} />,
       color: "bg-blue-50"
     }
