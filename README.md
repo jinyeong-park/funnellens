@@ -136,11 +136,12 @@ A visual decision-tree interface displaying:
 
 ### Metric Cards
 High-fidelity analytics cards showing:
-- CPM
-- CTR
-- CPC
-- CVR
-- CPA
+
+- CPM (Cost Per Mille): The cost of reaching 1,000 ad impressions. Used to measure advertising exposure efficiency.
+- CTR (Click-Through Rate): The percentage of users who clicked on an ad after seeing it. Indicates ad engagement and relevance.
+- CPC (Cost Per Click): The average amount paid for each ad click. Measures traffic acquisition cost.
+- CVR (Conversion Rate): The percentage of visitors who completed a desired action, such as a signup or purchase.
+- CPA (Cost Per Acquisition): The average cost required to acquire a customer or conversion. Measures overall campaign efficiency.
 - Closing Rate
 
 Each metric includes status indicators:
